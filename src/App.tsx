@@ -7,7 +7,7 @@ const App: React.FC = () => {
   const { token } = theme.useToken();
   const [loading, setLoading] = useState<boolean>(false);
   const [value, setValue] = useState<string>('');
-
+  console.log('test')
   const iconStyle = {
     fontSize: 18,
     color: token.colorText,
