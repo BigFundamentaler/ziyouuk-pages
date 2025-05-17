@@ -2,6 +2,7 @@ import { ApiOutlined, LinkOutlined, SearchOutlined } from '@ant-design/icons';
 import { Sender } from '@ant-design/x';
 import { Button, Divider, Flex, Switch, theme } from 'antd';
 import React, { useState } from 'react';
+import { sendChatMessage } from './api/chat';
 import './App.css'
 const App: React.FC = () => {
   const { token } = theme.useToken();
@@ -12,7 +13,26 @@ const App: React.FC = () => {
     fontSize: 18,
     color: token.colorText,
   };
+  const handleSend = async (input: string) => {
+    setLoading(true)
+    if (!input.trim()) return;
 
+    try {
+      const userMessage = { text: input, sender: 'user' };
+
+      const { data } = await sendChatMessage(input);
+      const botMessage = {
+        text: data.sendMessage.text,
+        sender: 'bot',
+        timestamp: data.sendMessage.timestamp
+      };
+      console.log('botMessage:', botMessage)
+      setValue('');
+      setLoading(false)
+    } catch (error) {
+      console.error("发送失败:", error);
+    }
+  };
   React.useEffect(() => {
     if (loading) {
       const timer = setTimeout(() => {
@@ -60,10 +80,13 @@ const App: React.FC = () => {
       }}
       onSubmit={() => {
         setLoading(true);
+        handleSend(value)
+        console.log('value:', value)
       }}
       onCancel={() => {
         setLoading(false);
       }}
+
       actions={false}
     />
   );
