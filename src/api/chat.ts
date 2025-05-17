@@ -1,5 +1,5 @@
 export async function sendChatMessage(userInput:any) {
-  const WORKER_URL = "ziyouuk-worker.workingxw.workers.dev";
+  const WORKER_URL = "https://ziyouuk-worker.workingxw.workers.dev";
   
   const response = await fetch(WORKER_URL, {
     method: "POST",

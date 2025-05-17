@@ -18,7 +18,7 @@ const App: React.FC = () => {
     if (!input.trim()) return;
 
     try {
-      const userMessage = { text: input, sender: 'user' };
+      // const userMessage = { text: input, sender: 'user' };
 
       const { data } = await sendChatMessage(input);
       const botMessage = {
@@ -81,7 +81,6 @@ const App: React.FC = () => {
       onSubmit={() => {
         setLoading(true);
         handleSend(value)
-        console.log('value:', value)
       }}
       onCancel={() => {
         setLoading(false);
