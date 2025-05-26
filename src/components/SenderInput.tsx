@@ -2,6 +2,7 @@ import { ApiOutlined, LinkOutlined, SearchOutlined } from '@ant-design/icons';
 import { Sender } from '@ant-design/x';
 import { Button, Divider, Flex, Switch, theme } from 'antd';
 import React, { useState } from 'react';
+import {useChatConfig} from '../context/ChatConfig';
 interface ChildProps {
     onSubmitClick: (val: string, callback?: () => void) => Promise<void>;
 }
@@ -9,7 +10,10 @@ const SenderInput: React.FC<ChildProps> = ({ onSubmitClick }) => {
     const { token } = theme.useToken();
     const [loading, setLoading] = useState<boolean>(false);
     const [value, setValue] = useState<string>('');
-
+    const {isCodeReview,setReviewState} = useChatConfig()
+    const onChangeSwitch= (checked:boolean)=>{
+        setReviewState(checked)
+    }
     const iconStyle = {
         fontSize: 18,
         color: token.colorText,
@@ -28,8 +32,8 @@ const SenderInput: React.FC<ChildProps> = ({ onSubmitClick }) => {
                         <Flex gap="small" align="center">
                             <Button style={iconStyle} type="text" icon={<LinkOutlined />} />
                             <Divider type="vertical" />
-                            Deep Thinking
-                            <Switch size="small" />
+                            Code Review
+                            <Switch size="small" checked={isCodeReview} onChange={onChangeSwitch}/>
                             <Divider type="vertical" />
                             <Button icon={<SearchOutlined />}>Global Search</Button>
                         </Flex>

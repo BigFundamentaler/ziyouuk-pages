@@ -1,12 +1,10 @@
-import React from 'react';
-import { XProvider } from '@ant-design/x';
-import App from './App';
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+import './index.css'
+import App from './App.tsx'
 
-const Main: React.FC = () => (
-  <XProvider theme={{ token: { colorPrimary: '#00b96b' } }}>
-    <App></App>
-    {/* <Chatpage /> */}
-  </XProvider>
-);
-
-export default Main;
+createRoot(document.getElementById('root')!).render(
+  <StrictMode>
+    <App />
+  </StrictMode>,
+)

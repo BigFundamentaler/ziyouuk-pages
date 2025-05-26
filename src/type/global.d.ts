@@ -3,5 +3,10 @@ interface ChatMsg {
     content: string
     /** 用户角色 */
     role: 'AI' | 'User'
-    id: number
+    id?: number
+}
+
+interface CoreMessage {
+    role: 'user' | 'assistant' | 'system';
+    content: string
 }
